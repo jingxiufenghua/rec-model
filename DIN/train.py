@@ -50,6 +50,9 @@ if __name__ == '__main__':
     train_X, train_y = train
     val_X, val_y = val
     test_X, test_y = test
+
+    print(test_X)
+
     # ============================Build Model==========================
     model = DIN(feature_columns, behavior_list, att_hidden_units, ffn_hidden_units, att_activation, 
         ffn_activation, maxlen, dnn_dropout)

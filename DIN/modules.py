@@ -20,7 +20,7 @@ class Attention_Layer(Layer):
         self.att_dense = [Dense(unit, activation=activation) for unit in att_hidden_units]
         self.att_final_dense = Dense(1)
 
-    # @tf.function
+    @tf.function
     def call(self, inputs):
         # query: candidate item  (None, d * 2), d is the dimension of embedding
         # key: hist items  (None, seq_len, d * 2) 
