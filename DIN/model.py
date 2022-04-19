@@ -14,7 +14,7 @@ from tensorflow.keras.regularizers import l2
 from modules import *
 import numpy as np
 
-tf.config.experimental_run_functions_eagerly(True)
+# tf.config.experimental_run_functions_eagerly(True)
 
 class DIN(Model):
 
@@ -70,7 +70,7 @@ class DIN(Model):
         self.dropout = Dropout(dnn_dropout)
         self.dense_final = Dense(1)
 
-    @tf.function
+    # @tf.function
     def call(self, inputs):
         # dense_inputs and sparse_inputs is empty
         # seq_inputs (None, maxlen, behavior_num)

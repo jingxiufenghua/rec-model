@@ -17,6 +17,8 @@ from utils import *
 import pickle
 import os
 
+print(tf.test.is_gpu_available())
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['CUDA_VISIBLE_DEVICES'] = '6'
 
@@ -38,7 +40,7 @@ if __name__ == '__main__':
     # ========================== Create dataset =======================
     # feature_columns, behavior_list, train, val, test = create_amazon_electronic_dataset(file, embed_dim, maxlen)
 
-    with open("/Users/songlei/Desktop/moji/Recommender-System-with-TF2.0/dataset/dataset_moji.pkl", 'rb') as f:
+    with open("F:/Recommender-System-with-TF2.0/dataset/dataset_moji.pkl", 'rb') as f:
         feature_columns = pickle.load(f)
         behavior_list = pickle.load(f)
         train = pickle.load(f)
@@ -54,7 +56,7 @@ if __name__ == '__main__':
     model.summary()
     # ============================model checkpoint======================
     # check_path = 'save/din_weights.epoch_{epoch:04d}.val_loss_{val_loss:.4f}.ckpt'
-    check_path = "/Users/songlei/Desktop/moji/Recommender-System-with-TF2.0/save/din_weights.cp.ckpt"
+    check_path = "F:/Recommender-System-with-TF2.0/saved/din_weights.cp.ckpt"
     checkpoint = tf.keras.callbacks.ModelCheckpoint(check_path, save_weights_only=True,
                                                     verbose=1, period=1)
     # =========================Compile============================
@@ -76,22 +78,12 @@ if __name__ == '__main__':
     # ===========================Save Model========================
     # model.load_weights(check_path)
 
-    model_save_path ='/Users/songlei/Desktop/moji/Recommender-System-with-TF2.0/saved_model/din_model'
+    model_save_path ='F:/Recommender-System-with-TF2.0/saved_model/din_model'
     model.save(model_save_path,save_format="tf")
 
-    # tf.keras.models.save_model(
-    #     model,
-    #     model_save_path,
-    #     overwrite=True,
-    #     include_optimizer=True,
-    #     save_format="tf",
-    #     signatures=None,
-    #     options=None
-    # )
 
-
-    reconstructed_model = tf.keras.models.load_model(model_save_path)
-    print('test AUC: %f' % model.evaluate(test_X, test_y, batch_size=batch_size)[1])
+    # reconstructed_model = tf.keras.models.load_model(model_save_path)
+    # print('test AUC: %f' % reconstructed_model.evaluate(train_X, train_y, batch_size=batch_size)[1])
 
 
 
